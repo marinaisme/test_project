@@ -1,14 +1,21 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 import time
 import requests
+import streamlit
 
 # Configure Selenium to use a headless browser
 chrome_options = Options()
 chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-gpu")
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--disable-dev-shm-usage")
 
 # Set up the WebDriver (Make sure the correct path to your chromedriver is set)
-driver = webdriver.Chrome(options=chrome_options)
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # The URL you want to scrape
 base_url = "https://www.asx.com.au/asx/1/company/{TICKER}/announcements?count=20&market_sensitive=false"
@@ -41,6 +48,8 @@ for ticker in list_of_tickers:
 
         print(f"Ticker: {ticker}")
         print(announcements)
+        streamlit.write(f"Announcements for {ticker}:")
+        streamlit.json(announcements)
     else:
         print(f"Failed to retrieve data for ticker: {ticker}")
 
