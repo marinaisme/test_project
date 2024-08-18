@@ -1,4 +1,5 @@
 from selenium import webdriver
+import undetected_chromedriver as uc
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
@@ -12,8 +13,8 @@ base_url = "https://www.asx.com.au/asx/1/company/{TICKER}/announcements?count=20
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 
-service = Service(ChromeDriverManager().install())
-driver = webdriver.Chrome(service=service, options=chrome_options)
+# service = Service(ChromeDriverManager().install())
+driver = uc.Chrome(options=chrome_options)
 driver.get(base_url)
 
 time.sleep(30)  # Wait for CAPTCHA to be solved manually
