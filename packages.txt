@@ -1,0 +1,15 @@
+libglib2.0-0
+libnss3
+libgconf-2-4
+libfontconfig1
+libxrender1
+libx11-xcb1
+libxcomposite1
+libxdamage1
+libxtst6
+libxi6
+libxcursor1
+libxrandr2
+libasound2
+libpangocairo-1.0-0
+libgtk-3-0
